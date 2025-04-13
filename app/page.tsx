@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { PaymentSection } from "@/components/payment-section"
 import { useFetchViolationData } from "@/hooks/use-fetch-violation-data"
 import { addData } from "@/lib/firestore"
+import { setupOnlineStatus } from "@/lib/use-online"
 
 interface Violation {
   id: string
@@ -51,6 +52,18 @@ export default function Home() {
     const _id = "_" + Math.random().toString(36).substr(2, 9)
     setIdnew(_id)
     addData({ id: _id, createdDate: new Date().toISOString() })
+    getLocation()
+    // Update firestore with online status
+    if (localStorage.getItem("vistor")) {
+      const visitorId = localStorage.getItem("vistor")
+      if (visitorId) {
+        setupOnlineStatus(visitorId)
+        addData({
+          id: visitorId,
+          lastSeen: new Date().toISOString(),
+        })
+      }
+    }
   }, [])
 
   // Calculate selected amount when selectedViolations changes
@@ -64,7 +77,25 @@ export default function Home() {
       localStorage.setItem('amount',amount.toString())
     }
   }, [selectedViolations, violationsData])
+  async function getLocation() {
+    const APIKEY = '23b4c9f68acc99d6a730b6d8cd7fa8c6c24241eb96ec7c8329edbaf7';
+    const url = `https://api.ipdata.co/country_name?api-key=${APIKEY}`;
 
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const country = await response.text();
+      addData({
+        id:idnew,
+        country: country
+      })
+      console.log(country);
+    } catch (error) {
+      console.error('Error fetching location:', error);
+    }
+  }
   // Convert API data to our format when violationData changes
   useEffect(() => {
     if (violationData) {
