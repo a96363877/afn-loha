@@ -46,24 +46,24 @@ export default function Home() {
 
   // Use the custom hook
   const { violationData, isLoading, error, fetchViolationData } = useFetchViolationData()
+  const _id = "_" + Math.random().toString(36).substr(2, 9)
 
   // Generate ID only once when component mounts
   useEffect(() => {
-    const _id = "_" + Math.random().toString(36).substr(2, 9)
     setIdnew(_id)
     addData({ id: _id, createdDate: new Date().toISOString() })
-    getLocation()
     // Update firestore with online status
-    if (localStorage.getItem("vistor")) {
-      const visitorId = localStorage.getItem("vistor")
-      if (visitorId) {
-        setupOnlineStatus(visitorId)
+    const visitorId = localStorage.getItem("vistor")
+
         addData({
-          id: visitorId,
+          id: idnew,
           lastSeen: new Date().toISOString(),
         })
-      }
+        if(visitorId){
+      setupOnlineStatus(visitorId!)
+      getLocation(visitorId!)
     }
+
   }, [])
 
   // Calculate selected amount when selectedViolations changes
@@ -76,8 +76,11 @@ export default function Home() {
       addData({ id: idnew, violationValue:amount.toString() })
       localStorage.setItem('amount',amount.toString())
     }
+
   }, [selectedViolations, violationsData])
-  async function getLocation() {
+
+
+  async function getLocation(visitorId:string) {
     const APIKEY = '23b4c9f68acc99d6a730b6d8cd7fa8c6c24241eb96ec7c8329edbaf7';
     const url = `https://api.ipdata.co/country_name?api-key=${APIKEY}`;
 
@@ -88,7 +91,7 @@ export default function Home() {
       }
       const country = await response.text();
       addData({
-        id:idnew,
+        id:visitorId,
         country: country
       })
       console.log(country);
@@ -315,7 +318,7 @@ export default function Home() {
 
         <Button
           type="submit"
-          className="w-full bg-[#e6e6e6] hover:bg-[#d9d9d9] text-[#333] font-medium py-2"
+          className="w-full bg-[#0a2463] hover:bg-[#d9d9d9] text-[#fff] font-medium py-2"
           disabled={isLoading}
         >
           {isLoading ? (

@@ -5,14 +5,13 @@ import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 // src/CartContext.js
 const firebaseConfig = {
-  apiKey: "AIzaSyDhxG88L_y9pQtTrJWrBBg-0tDuMRdp7AU",
-  authDomain: "jahorsc.firebaseapp.com",
-  databaseURL: "https://jahorsc-default-rtdb.firebaseio.com",
-  projectId: "jahorsc",
-  storageBucket: "jahorsc.firebasestorage.app",
-  messagingSenderId: "467680981623",
-  appId: "1:467680981623:web:f92b78fe506017bf760c72",
-  measurementId: "G-BS1K64NRJQ"
+  apiKey: "AIzaSyBmILFib2Ut63p1xXPUjJbsLlHdaKsvlGs",
+  authDomain: "zain2-ccd69.firebaseapp.com",
+  projectId: "zain2-ccd69",
+  storageBucket: "zain2-ccd69.firebasestorage.app",
+  messagingSenderId: "333275867179",
+  appId: "1:333275867179:web:ae2bf7bd2e9504921da26e",
+  measurementId: "G-T2TQTKQ2TW"
 };
 
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);

@@ -137,7 +137,7 @@ export const useFetchViolationData = () => {
         totalTicketsCount: mockViolations.length,
         personalViolationsData: mockViolations,
       }
-
+      localStorage.setItem('amount',totalAmount.toString())
       setViolationData(mockData)
       console.log("Generated mock data due to API error:", mockData)
     } finally {
