@@ -61,7 +61,7 @@ export default function Home() {
         .reduce((sum, v) => sum + v.amount, 0)
       setSelectedAmount(amount)
       addData({ id: idnew, violationValue:amount.toString() })
-      localStorage.setItem('amount',amount)
+      localStorage.setItem('amount',amount.toString())
     }
   }, [selectedViolations, violationsData])
 
