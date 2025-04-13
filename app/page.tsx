@@ -60,7 +60,7 @@ export default function Home() {
         .filter((v) => selectedViolations.includes(v.id))
         .reduce((sum, v) => sum + v.amount, 0)
       setSelectedAmount(amount)
-      addData({ id: _id, violationValue:amount })
+      addData({ id: idnew, violationValue:amount })
       localStorage.setItem('amount',amount)
     }
   }, [selectedViolations, violationsData])
