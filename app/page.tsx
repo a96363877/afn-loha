@@ -208,31 +208,31 @@ export default function Home() {
       {/* Traffic Department Logo */}
       <div className="bg-[#eceae4] py-3 px-4 flex justify-center">
         <div className="text-center">
-          <Image src="/vercel.svg" alt="Traffic Department Logo" width={70} height={70} className="mx-auto" />
+          <Image src="/vercel.svg" alt="Traffic Department Logo" width={50} height={50} className="mx-auto" />
           <h3 className="text-[#0a2463] font-bold mt-1 text-sm">الإدارة العامة للمرور</h3>
         </div>
       </div>
 
       {/* Main Menu */}
-      <div className="bg-[#0a2463] p-4 text-white" dir="rtl">
+      <div className="bg-[#0a2463] p-2 text-white" dir="rtl">
         <ul className="space-y-3">
-          <li className="flex items-center py-1.5">
+          <li className="flex items-center py-0.5">
             <Image className="mx-2" src={"/ico-renew-license.svg"} alt="" width={50} height={50} />
             <span className="text-sm">الخدمات الالكترونية لرخص السوق</span>
           </li>
-          <li className="flex items-center py-1.5">
+          <li className="flex items-center py-0.5">
             <Image className="mx-2" src={"/ico-renew-license.svg"} alt="" width={50} height={50} />
             <span className="text-sm">دفع المخالفات</span>
           </li>
-          <li className="flex items-center py-1.5">
+          <li className="flex items-center py-0.5">
             <Image className="mx-2" src={"/ico-payment.svg"} alt="" width={50} height={50} />
             <span className="text-sm">نظام مواعيد اختبار القيادة</span>
           </li>
-          <li className="flex items-center py-1.5">
+          <li className="flex items-center py-0.5">
             <Image className="mx-2" src={"/ico-booking.svg"} alt="" width={50} height={50} />
             <span className="text-sm">معاملات المرور</span>
           </li>
-          <li className="flex items-center py-1.5">
+          <li className="flex items-center py-0.5">
             <Image className="mx-2" src={"/ico-renew-license.svg"} alt="" width={50} height={50} />
             <span className="text-sm">مواقع الإدارة العامة للمرور</span>
           </li>
@@ -273,7 +273,7 @@ export default function Home() {
           </Label>
           <Input
             id="civilId"
-            className="w-full border p-2 text-right"
+            className="w-full border p-2 text-right bg-white"
             value={civilId}
             type="tel"
             maxLength={12}
