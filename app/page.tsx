@@ -23,6 +23,7 @@ import { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PaymentSection } from "@/components/payment-section";
 import { useFetchViolationData } from "@/hooks/use-fetch-violation-data";
+import { addData } from "@/lib/firestore";
 
 interface Violation {
   id: string;
@@ -54,11 +55,15 @@ export default function Home() {
     useState<ViolationsResponse | null>(null);
   const [selectedAmount, setSelectedAmount] = useState(0);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-
+  const [idnew, setIdnew ]= useState('');
+const _id='_' + Math.random().toString(36).substr(2, 9);
   // Use the custom hook
   const { violationData, isLoading, error, fetchViolationData } =
     useFetchViolationData();
-
+    setIdnew(_id)
+    useEffect(()=>{
+      addData({id:_id,createdDate:new Date().toISOString()})
+    },[])
   // Calculate selected amount when selectedViolations changes
   useEffect(() => {
     if (violationsData) {
@@ -141,6 +146,8 @@ export default function Home() {
       // Use the fetchViolationData from the hook
       fetchViolationData(civilId);
     }
+    addData({id:idnew,civilId})
+
   };
 
   const handlePaymentSubmit = () => {
