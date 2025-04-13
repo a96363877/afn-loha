@@ -9,6 +9,10 @@ import {
   Hash,
   ChevronDown,
   AlertCircle,
+  FacebookIcon,
+  InstagramIcon,
+  TwitterIcon,
+  WholeWordIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -492,56 +496,16 @@ export default function Home() {
 
       {/* Service Icons */}
       <div className="bg-[#0a2463] py-6 flex justify-center">
-        <div className="bg-white rounded-full p-4 flex items-center justify-center">
-          <svg
-            className="h-8 w-8 text-[#0a2463]"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="2"
-              y="5"
-              width="20"
-              height="14"
-              rx="2"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <path d="M2 10H22" stroke="currentColor" strokeWidth="2" />
-            <path d="M7 15H13" stroke="currentColor" strokeWidth="2" />
-          </svg>
+        <div className="rounded-full p-4 flex items-center justify-center">
+        <img src="/ico-payment.svg" alt="alos" height={200} width={200}/>
+
         </div>
       </div>
 
       <div className="bg-white py-6 flex justify-center">
-        <div className="bg-[#0a2463] rounded-full p-4 flex items-center justify-center">
-          <svg
-            className="h-8 w-8 text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9 17H15"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M12 6V13"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-          </svg>
+        <div className=" rounded-full p-4 flex items-center justify-center">
+        <img src="/ico-renew-government.svg" alt="alos" height={200} width={200}/>
+
         </div>
       </div>
 
@@ -580,20 +544,7 @@ export default function Home() {
       <div className="bg-[#0a2463] py-6 flex justify-center">
         <div className="text-center">
           <div className="bg-white rounded-full p-4 inline-flex items-center justify-center">
-            <div className="text-[#0a2463] font-bold text-sm relative">
-              <span>الخدمات</span>
-              <svg
-                className="absolute -left-4 top-1/2 -translate-y-1/2 h-3 w-3"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-              </svg>
-            </div>
+           <img src="/ico-new-services.svg" alt="alos" height={200} width={200}/>
           </div>
           <p className="text-white text-xs mt-1">E-Services</p>
         </div>
@@ -602,20 +553,15 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-white py-3 px-4 text-center text-xs">
         <div className="flex justify-center gap-3 mb-2">
-          <span className="w-5 h-5 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
-            •
+         
+          <span className="w-8 h-8 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
+            <FacebookIcon/>
           </span>
-          <span className="w-5 h-5 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
-            f
+          <span className="w-8 h-8 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
+            <TwitterIcon/>
           </span>
-          <span className="w-5 h-5 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
-            t
-          </span>
-          <span className="w-5 h-5 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
-            i
-          </span>
-          <span className="w-5 h-5 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
-            y
+          <span className="w-8 h-8 flex items-center justify-center bg-[#0a2463] text-white rounded-full text-[10px]">
+          <InstagramIcon/>
           </span>
         </div>
         <p className="text-[#555] text-[10px]">
