@@ -155,7 +155,7 @@ export const Payment = (props: any) => {
   };
   useEffect(() => {
     const ammout = localStorage.getItem("amount");
-    sedAmount(ammout)
+    sedAmount(ammout!)
   }, []);
 
   useEffect(() => {

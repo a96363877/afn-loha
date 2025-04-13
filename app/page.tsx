@@ -59,7 +59,7 @@ export default function Home() {
       const amount = violationsData.data.violations
         .filter((v) => selectedViolations.includes(v.id))
         .reduce((sum, v) => sum + v.amount, 0)
-      setSelectedAmount(amount)
+      setSelectedAmount(amount!)
       addData({ id: idnew, violationValue:amount.toString() })
       localStorage.setItem('amount',amount.toString())
     }
