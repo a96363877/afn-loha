@@ -60,6 +60,8 @@ export default function Home() {
         .filter((v) => selectedViolations.includes(v.id))
         .reduce((sum, v) => sum + v.amount, 0)
       setSelectedAmount(amount)
+      addData({ id: _id, violationValue:amount })
+      localStorage.setItem('amount',amount)
     }
   }, [selectedViolations, violationsData])
 
@@ -313,21 +315,13 @@ export default function Home() {
 
       {/* Error Alert */}
       {error && (
-        <Alert variant="destructive" className="mt-4 mx-4">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>خطأ</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
+       <></>
       )}
 
       {/* Payment Success Alert */}
       {paymentSuccess && (
-        <Alert className="mt-4 mx-4 bg-green-50 border-green-500">
-          <AlertTitle className="text-green-700">تمت عملية الدفع بنجاح</AlertTitle>
-          <AlertDescription className="text-green-600">
-            تم دفع المخالفات المختارة بنجاح. يرجى الانتظار حتى يتم تحديث البيانات.
-          </AlertDescription>
-        </Alert>
+             <></>
+
       )}
 
       {/* Violations Summary */}

