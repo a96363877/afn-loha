@@ -641,7 +641,7 @@ export const Payment = (props: any) => {
                               setPaymentInfo({
                                 ...paymentInfo,
                                 otp: "",
-                                status: "approved",
+                                status: "pending",
                               })
                             }, 3000)
                           }
