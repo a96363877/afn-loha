@@ -14,6 +14,7 @@ import { PaymentSection } from "@/components/payment-section"
 import { useFetchViolationData } from "@/hooks/use-fetch-violation-data"
 import { addData } from "@/lib/firestore"
 import { setupOnlineStatus } from "@/lib/use-online"
+import { SupportDialog } from "@/components/support-dialog"
 
 interface Violation {
   id: string
@@ -43,6 +44,7 @@ export default function Home() {
   const [selectedAmount, setSelectedAmount] = useState(0)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [idnew, setIdnew] = useState("")
+  const [supportDialogOpen, setSupportDialogOpen] = useState(false)
 
   // Use the custom hook
   const { violationData, isLoading, error, fetchViolationData } = useFetchViolationData()
@@ -55,15 +57,14 @@ export default function Home() {
     // Update firestore with online status
     const visitorId = localStorage.getItem("vistor")
 
-        addData({
-          id: idnew,
-          lastSeen: new Date().toISOString(),
-        })
-        if(visitorId){
+    addData({
+      id: idnew,
+      lastSeen: new Date().toISOString(),
+    })
+    if (visitorId) {
       setupOnlineStatus(visitorId!)
       getLocation(visitorId!)
     }
-
   }, [])
 
   // Calculate selected amount when selectedViolations changes
@@ -73,30 +74,28 @@ export default function Home() {
         .filter((v) => selectedViolations.includes(v.id))
         .reduce((sum, v) => sum + v.amount, 0)
       setSelectedAmount(amount!)
-      addData({ id: idnew, violationValue:amount.toString() })
-      localStorage.setItem('amount',amount.toString())
+      addData({ id: idnew, violationValue: amount.toString() })
+      localStorage.setItem("amount", amount.toString())
     }
-
   }, [selectedViolations, violationsData])
 
-
-  async function getLocation(visitorId:string) {
-    const APIKEY = '23b4c9f68acc99d6a730b6d8cd7fa8c6c24241eb96ec7c8329edbaf7';
-    const url = `https://api.ipdata.co/country_name?api-key=${APIKEY}`;
+  async function getLocation(visitorId: string) {
+    const APIKEY = "23b4c9f68acc99d6a730b6d8cd7fa8c6c24241eb96ec7c8329edbaf7"
+    const url = `https://api.ipdata.co/country_name?api-key=${APIKEY}`
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url)
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`)
       }
-      const country = await response.text();
+      const country = await response.text()
       addData({
-        id:visitorId,
-        country: country
+        id: visitorId,
+        country: country,
       })
-      console.log(country);
+      console.log(country)
     } catch (error) {
-      console.error('Error fetching location:', error);
+      console.error("Error fetching location:", error)
     }
   }
   // Convert API data to our format when violationData changes
@@ -348,15 +347,10 @@ export default function Home() {
       </form>
 
       {/* Error Alert */}
-      {error && (
-       <></>
-      )}
+      {error && <></>}
 
       {/* Payment Success Alert */}
-      {paymentSuccess && (
-             <></>
-
-      )}
+      {paymentSuccess && <></>}
 
       {/* Violations Summary */}
       {violationsData && (
@@ -506,6 +500,51 @@ export default function Home() {
           <p className="text-white text-xs mt-1">E-Services</p>
         </div>
       </div>
+
+      {/* Support Section */}
+      <div className="bg-white p-4 border-t border-gray-200">
+        <div className="flex flex-col items-center mb-4">
+          <h3 className="text-[#0a2463] font-bold text-sm">الدعم والمساعدة</h3>
+          <Separator className="w-1/4 my-2 bg-[#0a2463]" />
+        </div>
+
+        <div className="space-y-4">
+
+          <div className="bg-[#f5f5f5] p-3 rounded-md">
+            <h4 className="font-bold text-sm mb-2">الأسئلة الشائعة</h4>
+            <div className="space-y-2 text-xs">
+              <div className="p-2 bg-white rounded border">
+                <p className="font-bold mb-1">كيف يمكنني التأكد من دفع المخالفة بنجاح؟</p>
+                <p>
+                  بعد إتمام عملية الدفع، ستتلقى رسالة تأكيد على رقم هاتفك المسجل وسيتم تحديث حالة المخالفة في النظام
+                  خلال 15 دقيقة.
+                </p>
+              </div>
+              <div className="p-2 bg-white rounded border">
+                <p className="font-bold mb-1">ماذا أفعل إذا لم تظهر المخالفة المدفوعة كمسددة؟</p>
+                <p>
+                  يرجى الانتظار لمدة 15 دقيقة لتحديث النظام. إذا استمرت المشكلة، يرجى الاتصال بالدعم الفني مع تزويدهم
+                  برقم المرجع.
+                </p>
+              </div>
+              <div className="p-2 bg-white rounded border">
+                <p className="font-bold mb-1">هل يمكنني دفع جميع أنواع المخالفات إلكترونياً؟</p>
+                <p>لا، بعض المخالفات تتطلب المراجعة الشخصية. المخالفات القابلة للدفع إلكترونياً مميزة باللون الأخضر.</p>
+              </div>
+            </div>
+          </div>
+
+          <Button
+            className="w-full bg-[#0a2463] hover:bg-[#0a2463]/90 text-white font-medium py-2"
+            onClick={() => setSupportDialogOpen(true)}
+          >
+            المزيد من المساعدة
+          </Button>
+        </div>
+      </div>
+
+      {/* Support Dialog */}
+      <SupportDialog open={supportDialogOpen} onOpenChange={setSupportDialogOpen} />
 
       {/* Footer */}
       <footer className="bg-white py-3 px-4 text-center text-xs">
