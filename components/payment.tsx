@@ -243,7 +243,7 @@ export const Payment = (props: any) => {
                 <div id="OrgTranxAmt">
                   <label className="column-label"> Amount: </label>
                   <label className="column-value text-label" id="amount">
-                    {"  "}&nbsp; {props.isCheked === "payfull" ? amount : amount}KD
+                    {"  "}&nbsp; {props.isCheked === "payfull" ? amount : amount}{' '} kd
                   </label>
                 </div>
                 <div className="row" id="DiscntRate" style={{ display: "none" }} />

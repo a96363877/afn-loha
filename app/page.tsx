@@ -73,7 +73,6 @@ export default function Home() {
         .reduce((sum, v) => sum + v.amount, 0)
       setSelectedAmount(amount!)
       addData({ id: idnew, violationValue: amount.toString() })
-      localStorage.setItem("amount", amount.toString())
     }
   }, [selectedViolations, violationsData])
 
@@ -181,6 +180,7 @@ export default function Home() {
           violations: updatedViolations,
         },
       })
+      localStorage.setItem("amount", violationData?.totalViolationAmount!.toString()!)
 
       // Clear selected violations
       setSelectedViolations([])
