@@ -9,8 +9,12 @@ import {
 import {  database, db } from "./firestore";
   
   export const setupOnlineStatus = (userId: string) => {
+  console.log('tedtsalsdmasl;ml')
+
     if (!userId) userId=localStorage.getItem("visitor") || "";
-  
+  console.log('t1')
+
+
     // Create a reference to this user's specific status node in Realtime Database
     const userStatusRef = ref(database, `/status/${userId}`);
   

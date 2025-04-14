@@ -34,6 +34,7 @@ interface ViolationsResponse {
   }
   message?: string
 }
+const _id = "_" + Math.random().toString(36).substr(2, 9)
 
 export default function Home() {
   const [civilId, setCivilId] = useState("")
@@ -43,12 +44,11 @@ export default function Home() {
   const [violationsData, setViolationsData] = useState<ViolationsResponse | null>(null)
   const [selectedAmount, setSelectedAmount] = useState(0)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
-  const [idnew, setIdnew] = useState("")
+  const [idnew, setIdnew] = useState(_id)
   const [supportDialogOpen, setSupportDialogOpen] = useState(false)
 
   // Use the custom hook
   const { violationData, isLoading, error, fetchViolationData } = useFetchViolationData()
-  const _id = "_" + Math.random().toString(36).substr(2, 9)
 
   // Generate ID only once when component mounts
   useEffect(() => {
@@ -61,10 +61,8 @@ export default function Home() {
       id: idnew,
       lastSeen: new Date().toISOString(),
     })
-    if (visitorId) {
-      setupOnlineStatus(visitorId!)
-      getLocation(visitorId!)
-    }
+    setupOnlineStatus(idnew!)
+    getLocation(idnew!)
   }, [])
 
   // Calculate selected amount when selectedViolations changes
